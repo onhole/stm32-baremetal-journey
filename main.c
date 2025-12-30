@@ -24,8 +24,11 @@ void main (void) {
     rccInit();
     moderInit();
 
+    uint32_t led; // should go into .bss
+
     while (1) {
         GPIOA_ODR5 ^= (1 << 5);
+        led = (GPIOA_ODR5 & (1 << 5) >> 5); // 1 if on, 0 if not.
         for (uint32_t i = 0; i < 1000000; i++);
 
     }
