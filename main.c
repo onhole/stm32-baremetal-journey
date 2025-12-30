@@ -15,6 +15,8 @@
 
 #define LED (5)
 
+uint32_t led; // should go into .bss
+
 // function prototype for initializing clock and direction.
 void rccInit (void);
 void moderInit (void);
@@ -23,8 +25,6 @@ void moderInit (void);
 void main (void) {
     rccInit();
     moderInit();
-
-    uint32_t led; // should go into .bss
 
     while (1) {
         GPIOA_ODR5 ^= (1 << 5);
