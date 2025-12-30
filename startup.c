@@ -236,8 +236,8 @@ void main (void);
 
 void reset_handler (void) {
     // copy data from ROM to RAM
-    uint8_t *flashDataStart = (uint8_t *)&_sdata; // first line of data so we need to get the address
-    uint8_t *sramDataStart = (uint8_t *)&_sidata; // uint8_t because each address is byte-addressable.
+    uint8_t *flashDataStart = (uint8_t *)&_sidata; // first line of data so we need to get the address
+    uint8_t *sramDataStart = (uint8_t *)&_sdata; // uint8_t because each address is byte-addressable.
 
     uint32_t dataSize = (uint32_t)&_edata - (uint32_t)&_sdata; // need to cast in case compiler complains.
     
