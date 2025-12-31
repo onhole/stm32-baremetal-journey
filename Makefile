@@ -18,4 +18,4 @@ clean:
 	rm -r -i *.o *.elf *.map
 
 load:
-	openocd -f "C:\Users\hoanh\Downloads\openocd-v0.12.0-rc1-i686-w64-mingw32\share\openocd\scripts\board\st_nucleo_f4.cfg"
+	openocd -f board\st_nucleo_f4.cfg
