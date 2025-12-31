@@ -28,7 +28,7 @@ void main (void) {
 
     while (1) {
         GPIOA_ODR5 ^= (1 << 5);
-        led = (GPIOA_ODR5 & (1 << 5) >> 5); // 1 if on, 0 if not.
+        led = (GPIOA_ODR5 & (1 << 5)) >> 5; // 1 if on, 0 if not.
         for (uint32_t i = 0; i < 1000000; i++);
 
     }
