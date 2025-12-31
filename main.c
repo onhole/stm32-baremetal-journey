@@ -1,3 +1,11 @@
+/* dBlinky is slightly different from minimalBlinky in that it has an extra global and uninitialized
+variable led on line 23. led will change between 0 and 1 depending on line 36 or if the led is on or not.
+Utilize make load and connect to the openOCD server through arm-none-eabi-gdb.exe to inspect how this
+variable change. The address of led will be listed at 0x2000 0000 in the blinky.map file once make all
+is done.
+ 
+*/
+
 // header files
 #include <stdint.h>
 
