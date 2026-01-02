@@ -1,15 +1,18 @@
 CC=arm-none-eabi-gcc
 MACH=cortex-m4
 CFLAGS= -c -mcpu=$(MACH) -mthumb
+CPPFLAGS= -DSTM32F446xx \
+		-Ivendor/cmsis-device-f4/Include \
+		-Ivendor/CMSIS_6/CMSIS/Core/Include
 LDFLAGS= -nostdlib -T linker.ld -Wl,-Map=blinky.map
 
 all: startup.o main.o blinky.elf
 
 main.o: main.c
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@
 
 startup.o: startup.c
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@
 
 blinky.elf: main.o startup.o
 	$(CC) $(LDFLAGS) $^ -o $@
