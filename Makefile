@@ -6,7 +6,7 @@ CPPFLAGS= -DSTM32F446xx \
 		-Ivendor/CMSIS_6/CMSIS/Core/Include
 LDFLAGS= -nostdlib -T linker.ld -Wl,-Map=blinky.map
 
-all: startup.o main.o blinky.elf
+all: blinky.elf
 
 main.o: main.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@
@@ -21,4 +21,7 @@ clean:
 	rm -r -i *.o *.elf *.map
 
 load:
-	openocd -f board\st_nucleo_f4.cfg
+	openocd -f board/st_nucleo_f4.cfg
+
+flash: blinky.elf
+	openocd -f board/st_nucleo_f4.cfg -c "program blinky.elf verify reset exit"
