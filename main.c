@@ -1,6 +1,5 @@
 // header files
-#include <stdint.h>
-#include "stm32f4xx.h"
+#include "systick.h" // already includes stm32f4xx.h and stdint.h
 
 #define LED (5)
 
@@ -18,7 +17,7 @@ void main (void) {
     while (1) {
         GPIOA->ODR ^= (1u << LED);
         led_signal = ((1u << LED) & GPIOA->ODR) >> LED;
-        for (uint32_t i = 0; i < 1000000; i++);
+        systickMsDelay(500); // delay for 500ms.
 
     }
 }

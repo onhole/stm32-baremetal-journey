@@ -11,10 +11,13 @@ all: blinky.elf
 main.o: main.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@
 
+systick.o: systick.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@
+
 startup.o: startup.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@
 
-blinky.elf: main.o startup.o
+blinky.elf: main.o startup.o systick.o
 	$(CC) $(LDFLAGS) $^ -o $@
 
 clean:
