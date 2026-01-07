@@ -3,28 +3,33 @@ MACH=cortex-m4
 CFLAGS= -c -mcpu=$(MACH) -mthumb
 CPPFLAGS= -DSTM32F446xx \
 		-Ivendor/cmsis-device-f4/Include \
-		-Ivendor/CMSIS_6/CMSIS/Core/Include
+		-Ivendor/CMSIS_6/CMSIS/Core/Include \
+		-Idrivers/include
 LDFLAGS= -nostdlib -T linker.ld -Wl,-Map=blinky.map
+BUILD= build
 
-all: blinky.elf
+all: $(BUILD)/blinky.elf
 
-main.o: main.c
+$(BUILD)/main.o: app/main.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@
 
-systick.o: systick.c
+$(BUILD)/systick.o: drivers/systick.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@
 
-startup.o: startup.c
+$(BUILD)/gpio.o: drivers/gpio.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@
 
-blinky.elf: main.o startup.o systick.o
+$(BUILD)/startup.o: startup/startup.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@
+
+$(BUILD)/blinky.elf: $(BUILD)/main.o $(BUILD)/startup.o $(BUILD)/systick.o $(BUILD)/gpio.o
 	$(CC) $(LDFLAGS) $^ -o $@
 
 clean:
-	rm -r -i *.o *.elf *.map
+	rm -r -i $(BUILD)/*.o $(BUILD)/*.elf $(BUILD)/*.map
 
 load:
 	openocd -f board/st_nucleo_f4.cfg
 
-flash: blinky.elf
+flash: $(BUILD)/blinky.elf
 	openocd -f board/st_nucleo_f4.cfg -c "program blinky.elf verify reset exit"

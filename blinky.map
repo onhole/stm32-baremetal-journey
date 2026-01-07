@@ -1,0 +1,203 @@
+
+There are no discarded input sections
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x08000000         0x00080000         xr
+RAM              0x20000000         0x0001c000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD build/main.o
+LOAD build/startup.o
+LOAD build/systick.o
+LOAD build/gpio.o
+
+.vector_table   0x08000000      0x1c4
+                0x08000000                        . = ALIGN (0x4)
+ *(.vector_table)
+ .vector_table  0x08000000      0x1c4 build/startup.o
+                0x08000000                __vector_table
+                0x080001c4                        . = ALIGN (0x4)
+
+.text           0x080001c4      0x17c
+                0x080001c4                        . = ALIGN (0x4)
+ *(.text)
+ .text          0x080001c4       0x3c build/main.o
+                0x080001c4                main
+ .text          0x08000200       0x8c build/startup.o
+                0x08000200                reset_handler
+                0x08000284                EXTI15_10_handler
+                0x08000284                DMA1_Stream7_handler
+                0x08000284                USART1_handler
+                0x08000284                TIM1_UP_TIM10_handler
+                0x08000284                OTG_HS_handler
+                0x08000284                pend_SV_handler
+                0x08000284                EXTI0_handler
+                0x08000284                DMA1_Stream1_handler
+                0x08000284                TIM8_BRK_TIM12_handler
+                0x08000284                TIM6_DAC_handler
+                0x08000284                CAN1_RX1_handler
+                0x08000284                SDIO_handler
+                0x08000284                NMI_handler
+                0x08000284                DMA2_Stream3_handler
+                0x08000284                FMPI2C1_handler
+                0x08000284                TIM8_TRG_COM_TIM14_handler
+                0x08000284                OTG_HS_WKUP_handler
+                0x08000284                TIM2_handler
+                0x08000284                USART2_handler
+                0x08000284                usage_fault_handler
+                0x08000284                OTG_HS_EP1_IN_handler
+                0x08000284                SPI3_handler
+                0x08000284                TIM3_handler
+                0x08000284                SAI2_handler
+                0x08000284                WWDG_handler
+                0x08000284                default_handler
+                0x08000284                SPI2_handler
+                0x08000284                DMA2_Stream6_handler
+                0x08000284                SAI1_handler
+                0x08000284                UART4_handler
+                0x08000284                TIM8_UP_TIM13_handler
+                0x08000284                I2C3_ER_handler
+                0x08000284                DMA1_Stream3_handler
+                0x08000284                PVD_handler
+                0x08000284                EXTI9_5_handler
+                0x08000284                SPI4_handler
+                0x08000284                RTC_WKUP_handler
+                0x08000284                SPDIF_RX_handler
+                0x08000284                DMA1_Stream5_handler
+                0x08000284                FPU_handler
+                0x08000284                DMA2_Stream5_handler
+                0x08000284                UART5_handler
+                0x08000284                HDMI_CEC_handler
+                0x08000284                hard_fault_handler
+                0x08000284                RCC_handler
+                0x08000284                TIM8_CC_handler
+                0x08000284                FMPI2C1_error_handler
+                0x08000284                EXTI2_handler
+                0x08000284                SVC_handler
+                0x08000284                DMA2_Stream1_handler
+                0x08000284                TIM7_handler
+                0x08000284                I2C1_ER_handler
+                0x08000284                I2C2_EV_handler
+                0x08000284                OTG_FS_WKUP_handler
+                0x08000284                DCMI_handler
+                0x08000284                debug_monitor_handler
+                0x08000284                EXTI3_handler
+                0x08000284                DMA2_Stream0_handler
+                0x08000284                FLASH_handler
+                0x08000284                OTG_HS_EP1_OUT_handler
+                0x08000284                OTG_FS_handler
+                0x08000284                DMA1_Stream4_handler
+                0x08000284                I2C2_ER_handler
+                0x08000284                sys_tick_handler
+                0x08000284                TAMP_STAMP_handler
+                0x08000284                USART6_handler
+                0x08000284                TIM4_handler
+                0x08000284                DMA1_Stream2_handler
+                0x08000284                EXTI4_handler
+                0x08000284                CAN1_TX_handler
+                0x08000284                mem_manage_handler
+                0x08000284                CAN2_RX0_handler
+                0x08000284                DMA1_Stream6_handler
+                0x08000284                CAN2_TX_handler
+                0x08000284                CAN2_SCE_handler
+                0x08000284                ADC_handler
+                0x08000284                I2C1_EV_handler
+                0x08000284                CAN1_RX0_handler
+                0x08000284                TMI1_BRK_TIM9_handler
+                0x08000284                SPI1_handler
+                0x08000284                DMA2_Stream4_handler
+                0x08000284                FMC_handler
+                0x08000284                DMA2_Stream7_handler
+                0x08000284                QuadSPI_handler
+                0x08000284                DMA1_Stream0_handler
+                0x08000284                DMA2_Stream2_handler
+                0x08000284                EXTI1_handler
+                0x08000284                TIM1_TRG_COM_TIM11_handler
+                0x08000284                TIM5_handler
+                0x08000284                CAN1_SCE_handler
+                0x08000284                RTC_alarm_handler
+                0x08000284                I2C3_EV_handler
+                0x08000284                bus_fault_handler
+                0x08000284                CAN2_RX1_handler
+                0x08000284                TIM1_CC_handler
+                0x08000284                USART3_handler
+ .text          0x0800028c       0x60 build/systick.o
+                0x0800028c                systickMsDelay
+ .text          0x080002ec       0x54 build/gpio.o
+                0x080002ec                rccInit
+                0x08000318                moderInit
+ *(.rodata)
+                0x08000340                        . = ALIGN (0x4)
+                0x08000340                        _sidata = LOADADDR (.data)
+
+.glue_7         0x08000340        0x0
+ .glue_7        0x08000340        0x0 linker stubs
+
+.glue_7t        0x08000340        0x0
+ .glue_7t       0x08000340        0x0 linker stubs
+
+.vfp11_veneer   0x08000340        0x0
+ .vfp11_veneer  0x08000340        0x0 linker stubs
+
+.v4_bx          0x08000340        0x0
+ .v4_bx         0x08000340        0x0 linker stubs
+
+.iplt           0x08000340        0x0
+ .iplt          0x08000340        0x0 build/main.o
+
+.rel.dyn        0x08000340        0x0
+ .rel.iplt      0x08000340        0x0 build/main.o
+
+.data           0x20000000        0x4 load address 0x08000340
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        _sdata = .
+ *(.data)
+ .data          0x20000000        0x1 build/main.o
+                0x20000000                led_signal
+ .data          0x20000001        0x0 build/startup.o
+ .data          0x20000001        0x0 build/systick.o
+ .data          0x20000001        0x0 build/gpio.o
+                0x20000004                        . = ALIGN (0x4)
+ *fill*         0x20000001        0x3 
+                0x20000004                        _edata = .
+
+.igot.plt       0x20000004        0x0 load address 0x08000344
+ .igot.plt      0x20000004        0x0 build/main.o
+
+.bss            0x20000004        0x0 load address 0x08000344
+                0x20000004                        . = ALIGN (0x4)
+                0x20000004                        _sbss = .
+ *(.bss)
+ .bss           0x20000004        0x0 build/main.o
+ .bss           0x20000004        0x0 build/startup.o
+ .bss           0x20000004        0x0 build/systick.o
+ .bss           0x20000004        0x0 build/gpio.o
+                0x20000004                        . = ALIGN (0x4)
+                0x20000004                        _ebss = .
+OUTPUT(build/blinky.elf elf32-littlearm)
+LOAD linker stubs
+
+.comment        0x00000000       0x45
+ .comment       0x00000000       0x45 build/main.o
+                                 0x46 (size before relaxing)
+ .comment       0x00000045        0x0 build/startup.o
+                                 0x46 (size before relaxing)
+ .comment       0x00000045        0x0 build/systick.o
+                                 0x46 (size before relaxing)
+ .comment       0x00000045        0x0 build/gpio.o
+                                 0x46 (size before relaxing)
+
+.ARM.attributes
+                0x00000000       0x2e
+ .ARM.attributes
+                0x00000000       0x2e build/main.o
+ .ARM.attributes
+                0x0000002e       0x2e build/startup.o
+ .ARM.attributes
+                0x0000005c       0x2e build/systick.o
+ .ARM.attributes
+                0x0000008a       0x2e build/gpio.o
