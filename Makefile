@@ -32,4 +32,4 @@ load:
 	openocd -f board/st_nucleo_f4.cfg
 
 flash: $(BUILD)/blinky.elf
-	openocd -f board/st_nucleo_f4.cfg -c "program blinky.elf verify reset exit"
+	openocd -f board/st_nucleo_f4.cfg -c "program $< verify reset exit" # Needed to add in the $< in order to appropriately address the blinky.elf file in the build folder.
