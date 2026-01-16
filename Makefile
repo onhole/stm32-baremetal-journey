@@ -19,10 +19,16 @@ $(BUILD)/systick.o: drivers/systick.c
 $(BUILD)/gpio.o: drivers/gpio.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@
 
+$(BUILD)/pwmTIM.o: drivers/pwmTIM.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@
+
+$(BUILD)/pwmGPIO.o: drivers/pwmGPIO.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@
+
 $(BUILD)/startup.o: startup/startup.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@
 
-$(BUILD)/blinky.elf: $(BUILD)/main.o $(BUILD)/startup.o $(BUILD)/systick.o $(BUILD)/gpio.o
+$(BUILD)/blinky.elf: $(BUILD)/main.o $(BUILD)/startup.o $(BUILD)/systick.o $(BUILD)/gpio.o $(BUILD)/pwmTIM.o $(BUILD)/pwmGPIO.o
 	$(CC) $(LDFLAGS) $^ -o $@
 
 clean:
