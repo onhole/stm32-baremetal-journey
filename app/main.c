@@ -4,17 +4,22 @@
 #include "gpio.h"
 
 
-uint8_t led_signal = 1; // should go into the data section... for testing and debugging practice.
-
 // main function: repeatedly blinking LED 2.
 void main (void) {
     rccInit(); // will enable the AHB1 bus for ports A-H
-    timerSetup(); // will enable the clock to TIM2 and configure it accordingly.
-    pwmModerInit(); // will enable AF for PA5 and then the correct AF1 for PA5.
-
-    // TURN ON LED
-    pwmLedOn();
+    pwm_setupEZ(); // will enable AF for PA5 and then the correct AF1 for PA5.
+    tim_setupEZ(); // will enable the clock to TIM2 and configure it accordingly.
 
     while (1) {
     }
 }
+
+#ifdef USE_FULL_ASSERT
+void assert_failed(uint8_t* file, uint32_t line)
+{
+    // Optional: you can blink an LED or log the file/line
+    // For now, just trap in an infinite loop
+    while(1);
+}
+#endif
+

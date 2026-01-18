@@ -16,6 +16,9 @@ LOAD build/systick.o
 LOAD build/gpio.o
 LOAD build/pwmTIM.o
 LOAD build/pwmGPIO.o
+LOAD build/stm32f4xx_rcc.o
+LOAD build/stm32f4xx_gpio.o
+LOAD build/stm32f4xx_tim.o
 
 .vector_table   0x08000000      0x1c4
                 0x08000000                        . = ALIGN (0x4)
@@ -24,175 +27,347 @@ LOAD build/pwmGPIO.o
                 0x08000000                __vector_table
                 0x080001c4                        . = ALIGN (0x4)
 
-.text           0x080001c4      0x274
+.text           0x080001c4     0x7bc8
                 0x080001c4                        . = ALIGN (0x4)
  *(.text)
- .text          0x080001c4       0x16 build/main.o
+ .text          0x080001c4       0x1e build/main.o
                 0x080001c4                main
- *fill*         0x080001da        0x2 
- .text          0x080001dc       0x8c build/startup.o
-                0x080001dc                reset_handler
-                0x08000260                EXTI15_10_handler
-                0x08000260                DMA1_Stream7_handler
-                0x08000260                USART1_handler
-                0x08000260                TIM1_UP_TIM10_handler
-                0x08000260                OTG_HS_handler
-                0x08000260                pend_SV_handler
-                0x08000260                EXTI0_handler
-                0x08000260                DMA1_Stream1_handler
-                0x08000260                TIM8_BRK_TIM12_handler
-                0x08000260                TIM6_DAC_handler
-                0x08000260                CAN1_RX1_handler
-                0x08000260                SDIO_handler
-                0x08000260                NMI_handler
-                0x08000260                DMA2_Stream3_handler
-                0x08000260                FMPI2C1_handler
-                0x08000260                TIM8_TRG_COM_TIM14_handler
-                0x08000260                OTG_HS_WKUP_handler
-                0x08000260                TIM2_handler
-                0x08000260                USART2_handler
-                0x08000260                usage_fault_handler
-                0x08000260                OTG_HS_EP1_IN_handler
-                0x08000260                SPI3_handler
-                0x08000260                TIM3_handler
-                0x08000260                SAI2_handler
-                0x08000260                WWDG_handler
-                0x08000260                default_handler
-                0x08000260                SPI2_handler
-                0x08000260                DMA2_Stream6_handler
-                0x08000260                SAI1_handler
-                0x08000260                UART4_handler
-                0x08000260                TIM8_UP_TIM13_handler
-                0x08000260                I2C3_ER_handler
-                0x08000260                DMA1_Stream3_handler
-                0x08000260                PVD_handler
-                0x08000260                EXTI9_5_handler
-                0x08000260                SPI4_handler
-                0x08000260                RTC_WKUP_handler
-                0x08000260                SPDIF_RX_handler
-                0x08000260                DMA1_Stream5_handler
-                0x08000260                FPU_handler
-                0x08000260                DMA2_Stream5_handler
-                0x08000260                UART5_handler
-                0x08000260                HDMI_CEC_handler
-                0x08000260                hard_fault_handler
-                0x08000260                RCC_handler
-                0x08000260                TIM8_CC_handler
-                0x08000260                FMPI2C1_error_handler
-                0x08000260                EXTI2_handler
-                0x08000260                SVC_handler
-                0x08000260                DMA2_Stream1_handler
-                0x08000260                TIM7_handler
-                0x08000260                I2C1_ER_handler
-                0x08000260                I2C2_EV_handler
-                0x08000260                OTG_FS_WKUP_handler
-                0x08000260                DCMI_handler
-                0x08000260                debug_monitor_handler
-                0x08000260                EXTI3_handler
-                0x08000260                DMA2_Stream0_handler
-                0x08000260                FLASH_handler
-                0x08000260                OTG_HS_EP1_OUT_handler
-                0x08000260                OTG_FS_handler
-                0x08000260                DMA1_Stream4_handler
-                0x08000260                I2C2_ER_handler
-                0x08000260                sys_tick_handler
-                0x08000260                TAMP_STAMP_handler
-                0x08000260                USART6_handler
-                0x08000260                TIM4_handler
-                0x08000260                DMA1_Stream2_handler
-                0x08000260                EXTI4_handler
-                0x08000260                CAN1_TX_handler
-                0x08000260                mem_manage_handler
-                0x08000260                CAN2_RX0_handler
-                0x08000260                DMA1_Stream6_handler
-                0x08000260                CAN2_TX_handler
-                0x08000260                CAN2_SCE_handler
-                0x08000260                ADC_handler
-                0x08000260                I2C1_EV_handler
-                0x08000260                CAN1_RX0_handler
-                0x08000260                TMI1_BRK_TIM9_handler
-                0x08000260                SPI1_handler
-                0x08000260                DMA2_Stream4_handler
-                0x08000260                FMC_handler
-                0x08000260                DMA2_Stream7_handler
-                0x08000260                QuadSPI_handler
-                0x08000260                DMA1_Stream0_handler
-                0x08000260                DMA2_Stream2_handler
-                0x08000260                EXTI1_handler
-                0x08000260                TIM1_TRG_COM_TIM11_handler
-                0x08000260                TIM5_handler
-                0x08000260                CAN1_SCE_handler
-                0x08000260                RTC_alarm_handler
-                0x08000260                I2C3_EV_handler
-                0x08000260                bus_fault_handler
-                0x08000260                CAN2_RX1_handler
-                0x08000260                TIM1_CC_handler
-                0x08000260                USART3_handler
- .text          0x08000268       0x60 build/systick.o
-                0x08000268                systickMsDelay
- .text          0x080002c8       0xa0 build/gpio.o
-                0x080002c8                rccInit
-                0x080002f4                moderInit
-                0x0800031c                ledInit
-                0x0800032c                ledToggle
-                0x08000348                ledRead
- .text          0x08000368       0x8c build/pwmTIM.o
-                0x08000368                timerSetup
- .text          0x080003f4       0x44 build/pwmGPIO.o
-                0x080003f4                pwmModerInit
-                0x0800041c                pwmLedOn
+                0x080001d6                assert_failed
+ *fill*         0x080001e2        0x2 
+ .text          0x080001e4       0x8c build/startup.o
+                0x080001e4                reset_handler
+                0x08000268                EXTI15_10_handler
+                0x08000268                DMA1_Stream7_handler
+                0x08000268                USART1_handler
+                0x08000268                TIM1_UP_TIM10_handler
+                0x08000268                OTG_HS_handler
+                0x08000268                pend_SV_handler
+                0x08000268                EXTI0_handler
+                0x08000268                DMA1_Stream1_handler
+                0x08000268                TIM8_BRK_TIM12_handler
+                0x08000268                TIM6_DAC_handler
+                0x08000268                CAN1_RX1_handler
+                0x08000268                SDIO_handler
+                0x08000268                NMI_handler
+                0x08000268                DMA2_Stream3_handler
+                0x08000268                FMPI2C1_handler
+                0x08000268                TIM8_TRG_COM_TIM14_handler
+                0x08000268                OTG_HS_WKUP_handler
+                0x08000268                TIM2_handler
+                0x08000268                USART2_handler
+                0x08000268                usage_fault_handler
+                0x08000268                OTG_HS_EP1_IN_handler
+                0x08000268                SPI3_handler
+                0x08000268                TIM3_handler
+                0x08000268                SAI2_handler
+                0x08000268                WWDG_handler
+                0x08000268                default_handler
+                0x08000268                SPI2_handler
+                0x08000268                DMA2_Stream6_handler
+                0x08000268                SAI1_handler
+                0x08000268                UART4_handler
+                0x08000268                TIM8_UP_TIM13_handler
+                0x08000268                I2C3_ER_handler
+                0x08000268                DMA1_Stream3_handler
+                0x08000268                PVD_handler
+                0x08000268                EXTI9_5_handler
+                0x08000268                SPI4_handler
+                0x08000268                RTC_WKUP_handler
+                0x08000268                SPDIF_RX_handler
+                0x08000268                DMA1_Stream5_handler
+                0x08000268                FPU_handler
+                0x08000268                DMA2_Stream5_handler
+                0x08000268                UART5_handler
+                0x08000268                HDMI_CEC_handler
+                0x08000268                hard_fault_handler
+                0x08000268                RCC_handler
+                0x08000268                TIM8_CC_handler
+                0x08000268                FMPI2C1_error_handler
+                0x08000268                EXTI2_handler
+                0x08000268                SVC_handler
+                0x08000268                DMA2_Stream1_handler
+                0x08000268                TIM7_handler
+                0x08000268                I2C1_ER_handler
+                0x08000268                I2C2_EV_handler
+                0x08000268                OTG_FS_WKUP_handler
+                0x08000268                DCMI_handler
+                0x08000268                debug_monitor_handler
+                0x08000268                EXTI3_handler
+                0x08000268                DMA2_Stream0_handler
+                0x08000268                FLASH_handler
+                0x08000268                OTG_HS_EP1_OUT_handler
+                0x08000268                OTG_FS_handler
+                0x08000268                DMA1_Stream4_handler
+                0x08000268                I2C2_ER_handler
+                0x08000268                sys_tick_handler
+                0x08000268                TAMP_STAMP_handler
+                0x08000268                USART6_handler
+                0x08000268                TIM4_handler
+                0x08000268                DMA1_Stream2_handler
+                0x08000268                EXTI4_handler
+                0x08000268                CAN1_TX_handler
+                0x08000268                mem_manage_handler
+                0x08000268                CAN2_RX0_handler
+                0x08000268                DMA1_Stream6_handler
+                0x08000268                CAN2_TX_handler
+                0x08000268                CAN2_SCE_handler
+                0x08000268                ADC_handler
+                0x08000268                I2C1_EV_handler
+                0x08000268                CAN1_RX0_handler
+                0x08000268                TMI1_BRK_TIM9_handler
+                0x08000268                SPI1_handler
+                0x08000268                DMA2_Stream4_handler
+                0x08000268                FMC_handler
+                0x08000268                DMA2_Stream7_handler
+                0x08000268                QuadSPI_handler
+                0x08000268                DMA1_Stream0_handler
+                0x08000268                DMA2_Stream2_handler
+                0x08000268                EXTI1_handler
+                0x08000268                TIM1_TRG_COM_TIM11_handler
+                0x08000268                TIM5_handler
+                0x08000268                CAN1_SCE_handler
+                0x08000268                RTC_alarm_handler
+                0x08000268                I2C3_EV_handler
+                0x08000268                bus_fault_handler
+                0x08000268                CAN2_RX1_handler
+                0x08000268                TIM1_CC_handler
+                0x08000268                USART3_handler
+ .text          0x08000270       0x60 build/systick.o
+                0x08000270                systickMsDelay
+ .text          0x080002d0       0xa0 build/gpio.o
+                0x080002d0                rccInit
+                0x080002fc                moderInit
+                0x08000324                ledInit
+                0x08000334                ledToggle
+                0x08000350                ledRead
+ .text          0x08000370       0x90 build/pwmTIM.o
+                0x08000370                tim_setupEZ
+ .text          0x08000400       0x38 build/pwmGPIO.o
+                0x08000400                pwm_setupEZ
+ .text          0x08000438     0x19fc build/stm32f4xx_rcc.o
+                0x08000438                RCC_DeInit
+                0x080004a8                RCC_HSEConfig
+                0x080004ec                RCC_WaitForHSEStartUp
+                0x0800053c                RCC_AdjustHSICalibrationValue
+                0x08000588                RCC_HSICmd
+                0x080005c0                RCC_LSEConfig
+                0x08000620                RCC_LSICmd
+                0x08000658                RCC_PLLConfig
+                0x0800072c                RCC_PLLCmd
+                0x08000764                RCC_PLLI2SConfig
+                0x08000824                RCC_PLLI2SCmd
+                0x0800085c                RCC_PLLSAIConfig
+                0x080008f8                RCC_PLLSAICmd
+                0x08000930                RCC_ClockSecuritySystemCmd
+                0x08000968                RCC_MCO1Config
+                0x08000a00                RCC_MCO2Config
+                0x08000a98                RCC_SYSCLKConfig
+                0x08000af4                RCC_GetSYSCLKSource
+                0x08000b10                RCC_HCLKConfig
+                0x08000b88                RCC_PCLK1Config
+                0x08000bf0                RCC_PCLK2Config
+                0x08000c5c                RCC_GetClocksFreq
+                0x08000e34                RCC_RTCCLKConfig
+                0x08001014                RCC_RTCCLKCmd
+                0x0800104c                RCC_BackupResetCmd
+                0x08001084                RCC_I2SCLKConfig
+                0x08001128                RCC_SAICLKConfig
+                0x080011cc                RCC_SAIPLLI2SClkDivConfig
+                0x08001220                RCC_SAIPLLSAIClkDivConfig
+                0x08001278                RCC_LTDCCLKDivConfig
+                0x080012dc                RCC_TIMCLKPresConfig
+                0x08001310                RCC_AHB1PeriphClockCmd
+                0x08001384                RCC_AHB2PeriphClockCmd
+                0x080013f4                RCC_AHB3PeriphClockCmd
+                0x08001460                RCC_APB1PeriphClockCmd
+                0x080014d0                RCC_APB2PeriphClockCmd
+                0x08001544                RCC_AHB1PeriphResetCmd
+                0x080015b8                RCC_AHB2PeriphResetCmd
+                0x08001628                RCC_AHB3PeriphResetCmd
+                0x08001694                RCC_APB1PeriphResetCmd
+                0x08001704                RCC_APB2PeriphResetCmd
+                0x08001778                RCC_AHB1PeriphClockLPModeCmd
+                0x080017ec                RCC_AHB2PeriphClockLPModeCmd
+                0x0800185c                RCC_AHB3PeriphClockLPModeCmd
+                0x080018c8                RCC_APB1PeriphClockLPModeCmd
+                0x08001938                RCC_APB2PeriphClockLPModeCmd
+                0x080019ac                RCC_LSEModeConfig
+                0x080019fc                RCC_48MHzClockSourceConfig
+                0x08001a54                RCC_SDIOClockSourceConfig
+                0x08001aac                RCC_AHB1ClockGatingCmd
+                0x08001b20                RCC_SPDIFRXClockSourceConfig
+                0x08001b78                RCC_CECClockSourceConfig
+                0x08001bd0                RCC_FMPI2C1ClockSourceConfig
+                0x08001c28                RCC_ITConfig
+                0x08001ca4                RCC_GetFlagStatus
+                0x08001d78                RCC_ClearFlag
+                0x08001d94                RCC_GetITStatus
+                0x08001e04                RCC_ClearITPendingBit
+ .text          0x08001e34      0xec0 build/stm32f4xx_gpio.o
+                0x08001e34                GPIO_DeInit
+                0x08001ffc                GPIO_Init
+                0x08002244                GPIO_StructInit
+                0x08002276                GPIO_PinLockConfig
+                0x08002358                GPIO_ReadInputDataBit
+                0x08002494                GPIO_ReadInputData
+                0x0800253c                GPIO_ReadOutputDataBit
+                0x08002678                GPIO_ReadOutputData
+                0x08002720                GPIO_SetBits
+                0x080027dc                GPIO_ResetBits
+                0x0800289c                GPIO_WriteBit
+                0x080029ec                GPIO_Write
+                0x08002a98                GPIO_ToggleBits
+                0x08002b4c                GPIO_PinAFConfig
+ .text          0x08002cf4     0x4f5c build/stm32f4xx_tim.o
+                0x08002cf4                TIM_DeInit
+                0x08002f30                TIM_TimeBaseInit
+                0x080030f0                TIM_TimeBaseStructInit
+                0x08003122                TIM_PrescalerConfig
+                0x08003210                TIM_CounterModeConfig
+                0x080032c0                TIM_SetCounter
+                0x0800338c                TIM_SetAutoreload
+                0x08003458                TIM_GetCounter
+                0x08003520                TIM_GetPrescaler
+                0x080035e8                TIM_UpdateDisableConfig
+                0x080036ec                TIM_UpdateRequestConfig
+                0x080037f0                TIM_ARRPreloadConfig
+                0x080038f4                TIM_SelectOnePulseMode
+                0x080039f0                TIM_SetClockDivision
+                0x08003ae0                TIM_Cmd
+                0x08003be4                TIM_OC1Init
+                0x08003e40                TIM_OC2Init
+                0x08004088                TIM_OC3Init
+                0x080042b4                TIM_OC4Init
+                0x08004454                TIM_OCStructInit
+                0x08004496                TIM_SelectOCxM
+                0x08004640                TIM_SetCompare1
+                0x080046f4                TIM_SetCompare2
+                0x08004778                TIM_SetCompare3
+                0x080047e4                TIM_SetCompare4
+                0x08004850                TIM_ForcedOC1Config
+                0x08004934                TIM_ForcedOC2Config
+                0x080049ec                TIM_ForcedOC3Config
+                0x08004a88                TIM_ForcedOC4Config
+                0x08004b28                TIM_OC1PreloadConfig
+                0x08004c0c                TIM_OC2PreloadConfig
+                0x08004cc4                TIM_OC3PreloadConfig
+                0x08004d60                TIM_OC4PreloadConfig
+                0x08004e00                TIM_OC1FastConfig
+                0x08004ee4                TIM_OC2FastConfig
+                0x08004f9c                TIM_OC3FastConfig
+                0x08005038                TIM_OC4FastConfig
+                0x080050d8                TIM_ClearOC1Ref
+                0x080051bc                TIM_ClearOC2Ref
+                0x08005274                TIM_ClearOC3Ref
+                0x08005310                TIM_ClearOC4Ref
+                0x080053b0                TIM_OC1PolarityConfig
+                0x08005494                TIM_OC1NPolarityConfig
+                0x08005504                TIM_OC2PolarityConfig
+                0x080055bc                TIM_OC2NPolarityConfig
+                0x08005630                TIM_OC3PolarityConfig
+                0x080056d0                TIM_OC3NPolarityConfig
+                0x08005744                TIM_OC4PolarityConfig
+                0x080057e4                TIM_CCxCmd
+                0x08005908                TIM_CCxNCmd
+                0x080059b4                TIM_ICInit
+                0x08005c4c                TIM_ICStructInit
+                0x08005c7c                TIM_PWMIConfig
+                0x08005da0                TIM_GetCapture1
+                0x08005e50                TIM_GetCapture2
+                0x08005ed0                TIM_GetCapture3
+                0x08005f38                TIM_GetCapture4
+                0x08005fa0                TIM_SetIC1Prescaler
+                0x08006090                TIM_SetIC2Prescaler
+                0x08006154                TIM_SetIC3Prescaler
+                0x080061fc                TIM_SetIC4Prescaler
+                0x080062a8                TIM_BDTRConfig
+                0x080063d8                TIM_BDTRStructInit
+                0x08006414                TIM_CtrlPWMOutputs
+                0x08006498                TIM_SelectCOM
+                0x08006510                TIM_CCPreloadControl
+                0x08006588                TIM_ITConfig
+                0x080066b0                TIM_GenerateEvent
+                0x08006798                TIM_GetFlagStatus
+                0x080068d8                TIM_ClearFlag
+                0x080069a8                TIM_GetITStatus
+                0x08006ae4                TIM_ClearITPendingBit
+                0x08006bb4                TIM_DMAConfig
+                0x08006d48                TIM_DMACmd
+                0x08006e28                TIM_SelectCCDMA
+                0x08006ecc                TIM_InternalClockConfig
+                0x08006f58                TIM_ITRxExternalClockConfig
+                0x08007014                TIM_TIxExternalClockConfig
+                0x08007138                TIM_ETRClockMode1Config
+                0x08007238                TIM_ETRClockMode2Config
+                0x08007318                TIM_SelectInputTrigger
+                0x08007420                TIM_SelectOutputTrigger
+                0x080074f8                TIM_SelectSlaveMode
+                0x080075b8                TIM_SelectMasterSlaveMode
+                0x0800766c                TIM_ETRConfig
+                0x08007760                TIM_EncoderInterfaceConfig
+                0x080078b4                TIM_SelectHallSensor
+                0x08007970                TIM_RemapConfig
  *(.rodata)
-                0x08000438                        . = ALIGN (0x4)
-                0x08000438                        _sidata = LOADADDR (.data)
+ .rodata        0x08007c50       0x73 build/stm32f4xx_rcc.o
+ *fill*         0x08007cc3        0x1 
+ .rodata        0x08007cc4       0x64 build/stm32f4xx_gpio.o
+ .rodata        0x08007d28       0x63 build/stm32f4xx_tim.o
+                0x08007d8c                        . = ALIGN (0x4)
+ *fill*         0x08007d8b        0x1 
+                0x08007d8c                        _sidata = LOADADDR (.data)
 
-.glue_7         0x08000438        0x0
- .glue_7        0x08000438        0x0 linker stubs
+.glue_7         0x08007d8c        0x0
+ .glue_7        0x08007d8c        0x0 linker stubs
 
-.glue_7t        0x08000438        0x0
- .glue_7t       0x08000438        0x0 linker stubs
+.glue_7t        0x08007d8c        0x0
+ .glue_7t       0x08007d8c        0x0 linker stubs
 
-.vfp11_veneer   0x08000438        0x0
- .vfp11_veneer  0x08000438        0x0 linker stubs
+.vfp11_veneer   0x08007d8c        0x0
+ .vfp11_veneer  0x08007d8c        0x0 linker stubs
 
-.v4_bx          0x08000438        0x0
- .v4_bx         0x08000438        0x0 linker stubs
+.v4_bx          0x08007d8c        0x0
+ .v4_bx         0x08007d8c        0x0 linker stubs
 
-.iplt           0x08000438        0x0
- .iplt          0x08000438        0x0 build/main.o
+.iplt           0x08007d8c        0x0
+ .iplt          0x08007d8c        0x0 build/main.o
 
-.rel.dyn        0x08000438        0x0
- .rel.iplt      0x08000438        0x0 build/main.o
+.rel.dyn        0x08007d8c        0x0
+ .rel.iplt      0x08007d8c        0x0 build/main.o
 
-.data           0x20000000        0x4 load address 0x08000438
+.data           0x20000000        0x0 load address 0x08007d8c
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _sdata = .
  *(.data)
- .data          0x20000000        0x1 build/main.o
-                0x20000000                led_signal
- .data          0x20000001        0x0 build/startup.o
- .data          0x20000001        0x0 build/systick.o
- .data          0x20000001        0x0 build/gpio.o
- .data          0x20000001        0x0 build/pwmTIM.o
- .data          0x20000001        0x0 build/pwmGPIO.o
-                0x20000004                        . = ALIGN (0x4)
- *fill*         0x20000001        0x3 
-                0x20000004                        _edata = .
+ .data          0x20000000        0x0 build/main.o
+ .data          0x20000000        0x0 build/startup.o
+ .data          0x20000000        0x0 build/systick.o
+ .data          0x20000000        0x0 build/gpio.o
+ .data          0x20000000        0x0 build/pwmTIM.o
+ .data          0x20000000        0x0 build/pwmGPIO.o
+ .data          0x20000000        0x0 build/stm32f4xx_rcc.o
+ .data          0x20000000        0x0 build/stm32f4xx_gpio.o
+ .data          0x20000000        0x0 build/stm32f4xx_tim.o
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        _edata = .
 
-.igot.plt       0x20000004        0x0 load address 0x0800043c
- .igot.plt      0x20000004        0x0 build/main.o
+.igot.plt       0x20000000        0x0 load address 0x08007d8c
+ .igot.plt      0x20000000        0x0 build/main.o
 
-.bss            0x20000004        0x0 load address 0x0800043c
-                0x20000004                        . = ALIGN (0x4)
-                0x20000004                        _sbss = .
+.bss            0x20000000        0x0 load address 0x08007d8c
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        _sbss = .
  *(.bss)
- .bss           0x20000004        0x0 build/main.o
- .bss           0x20000004        0x0 build/startup.o
- .bss           0x20000004        0x0 build/systick.o
- .bss           0x20000004        0x0 build/gpio.o
- .bss           0x20000004        0x0 build/pwmTIM.o
- .bss           0x20000004        0x0 build/pwmGPIO.o
-                0x20000004                        . = ALIGN (0x4)
-                0x20000004                        _ebss = .
+ .bss           0x20000000        0x0 build/main.o
+ .bss           0x20000000        0x0 build/startup.o
+ .bss           0x20000000        0x0 build/systick.o
+ .bss           0x20000000        0x0 build/gpio.o
+ .bss           0x20000000        0x0 build/pwmTIM.o
+ .bss           0x20000000        0x0 build/pwmGPIO.o
+ .bss           0x20000000        0x0 build/stm32f4xx_rcc.o
+ .bss           0x20000000        0x0 build/stm32f4xx_gpio.o
+ .bss           0x20000000        0x0 build/stm32f4xx_tim.o
+                0x20000000                        . = ALIGN (0x4)
+                0x20000000                        _ebss = .
 OUTPUT(build/blinky.elf elf32-littlearm)
 LOAD linker stubs
 
@@ -209,6 +384,12 @@ LOAD linker stubs
                                  0x46 (size before relaxing)
  .comment       0x00000045        0x0 build/pwmGPIO.o
                                  0x46 (size before relaxing)
+ .comment       0x00000045        0x0 build/stm32f4xx_rcc.o
+                                 0x46 (size before relaxing)
+ .comment       0x00000045        0x0 build/stm32f4xx_gpio.o
+                                 0x46 (size before relaxing)
+ .comment       0x00000045        0x0 build/stm32f4xx_tim.o
+                                 0x46 (size before relaxing)
 
 .ARM.attributes
                 0x00000000       0x2e
@@ -224,3 +405,9 @@ LOAD linker stubs
                 0x000000b8       0x2e build/pwmTIM.o
  .ARM.attributes
                 0x000000e6       0x2e build/pwmGPIO.o
+ .ARM.attributes
+                0x00000114       0x2e build/stm32f4xx_rcc.o
+ .ARM.attributes
+                0x00000142       0x2e build/stm32f4xx_gpio.o
+ .ARM.attributes
+                0x00000170       0x2e build/stm32f4xx_tim.o
