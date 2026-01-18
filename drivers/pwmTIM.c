@@ -83,5 +83,8 @@ void tim_setupEZ(void) {
 
 void timSetDutyCycle(uint8_t duty) {
     // set the ccr1 value according to the duty cycle that is wanted.
+    if (duty > 100) { // caps out at 100%.
+        duty = 100;
+    }
     TIM2->CCR1 = (TIM2->ARR * duty) / 100;
 }
