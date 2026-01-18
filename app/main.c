@@ -9,7 +9,7 @@ void main (void) {
     rccInit(); // will enable the AHB1 bus for ports A-H
     pwm_setupEZ(); // will enable AF for PA5 and then the correct AF1 for PA5.
     tim_setupEZ(); // will enable the clock to TIM2 and configure it accordingly.
-    timSetDutyCycle(100);
+    timSetDutyCycleTemp(35); // at 30 degrees celcius, this should be off
 
     while (1) {
     }

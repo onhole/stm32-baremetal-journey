@@ -27,7 +27,7 @@ LOAD build/stm32f4xx_tim.o
                 0x08000000                __vector_table
                 0x080001c4                        . = ALIGN (0x4)
 
-.text           0x080001c4     0x7c04
+.text           0x080001c4     0x7c70
                 0x080001c4                        . = ALIGN (0x4)
  *(.text)
  .text          0x080001c4       0x24 build/main.o
@@ -139,202 +139,204 @@ LOAD build/stm32f4xx_tim.o
                 0x08000328                ledInit
                 0x08000338                ledToggle
                 0x08000354                ledRead
- .text          0x08000374       0xc8 build/pwmTIM.o
+ .text          0x08000374      0x134 build/pwmTIM.o
                 0x08000374                tim_setupEZ
-                0x08000408                timSetDutyCycle
- .text          0x0800043c       0x38 build/pwmGPIO.o
-                0x0800043c                pwm_setupEZ
- .text          0x08000474     0x19fc build/stm32f4xx_rcc.o
-                0x08000474                RCC_DeInit
-                0x080004e4                RCC_HSEConfig
-                0x08000528                RCC_WaitForHSEStartUp
-                0x08000578                RCC_AdjustHSICalibrationValue
-                0x080005c4                RCC_HSICmd
-                0x080005fc                RCC_LSEConfig
-                0x0800065c                RCC_LSICmd
-                0x08000694                RCC_PLLConfig
-                0x08000768                RCC_PLLCmd
-                0x080007a0                RCC_PLLI2SConfig
-                0x08000860                RCC_PLLI2SCmd
-                0x08000898                RCC_PLLSAIConfig
-                0x08000934                RCC_PLLSAICmd
-                0x0800096c                RCC_ClockSecuritySystemCmd
-                0x080009a4                RCC_MCO1Config
-                0x08000a3c                RCC_MCO2Config
-                0x08000ad4                RCC_SYSCLKConfig
-                0x08000b30                RCC_GetSYSCLKSource
-                0x08000b4c                RCC_HCLKConfig
-                0x08000bc4                RCC_PCLK1Config
-                0x08000c2c                RCC_PCLK2Config
-                0x08000c98                RCC_GetClocksFreq
-                0x08000e70                RCC_RTCCLKConfig
-                0x08001050                RCC_RTCCLKCmd
-                0x08001088                RCC_BackupResetCmd
-                0x080010c0                RCC_I2SCLKConfig
-                0x08001164                RCC_SAICLKConfig
-                0x08001208                RCC_SAIPLLI2SClkDivConfig
-                0x0800125c                RCC_SAIPLLSAIClkDivConfig
-                0x080012b4                RCC_LTDCCLKDivConfig
-                0x08001318                RCC_TIMCLKPresConfig
-                0x0800134c                RCC_AHB1PeriphClockCmd
-                0x080013c0                RCC_AHB2PeriphClockCmd
-                0x08001430                RCC_AHB3PeriphClockCmd
-                0x0800149c                RCC_APB1PeriphClockCmd
-                0x0800150c                RCC_APB2PeriphClockCmd
-                0x08001580                RCC_AHB1PeriphResetCmd
-                0x080015f4                RCC_AHB2PeriphResetCmd
-                0x08001664                RCC_AHB3PeriphResetCmd
-                0x080016d0                RCC_APB1PeriphResetCmd
-                0x08001740                RCC_APB2PeriphResetCmd
-                0x080017b4                RCC_AHB1PeriphClockLPModeCmd
-                0x08001828                RCC_AHB2PeriphClockLPModeCmd
-                0x08001898                RCC_AHB3PeriphClockLPModeCmd
-                0x08001904                RCC_APB1PeriphClockLPModeCmd
-                0x08001974                RCC_APB2PeriphClockLPModeCmd
-                0x080019e8                RCC_LSEModeConfig
-                0x08001a38                RCC_48MHzClockSourceConfig
-                0x08001a90                RCC_SDIOClockSourceConfig
-                0x08001ae8                RCC_AHB1ClockGatingCmd
-                0x08001b5c                RCC_SPDIFRXClockSourceConfig
-                0x08001bb4                RCC_CECClockSourceConfig
-                0x08001c0c                RCC_FMPI2C1ClockSourceConfig
-                0x08001c64                RCC_ITConfig
-                0x08001ce0                RCC_GetFlagStatus
-                0x08001db4                RCC_ClearFlag
-                0x08001dd0                RCC_GetITStatus
-                0x08001e40                RCC_ClearITPendingBit
- .text          0x08001e70      0xec0 build/stm32f4xx_gpio.o
-                0x08001e70                GPIO_DeInit
-                0x08002038                GPIO_Init
-                0x08002280                GPIO_StructInit
-                0x080022b2                GPIO_PinLockConfig
-                0x08002394                GPIO_ReadInputDataBit
-                0x080024d0                GPIO_ReadInputData
-                0x08002578                GPIO_ReadOutputDataBit
-                0x080026b4                GPIO_ReadOutputData
-                0x0800275c                GPIO_SetBits
-                0x08002818                GPIO_ResetBits
-                0x080028d8                GPIO_WriteBit
-                0x08002a28                GPIO_Write
-                0x08002ad4                GPIO_ToggleBits
-                0x08002b88                GPIO_PinAFConfig
- .text          0x08002d30     0x4f5c build/stm32f4xx_tim.o
-                0x08002d30                TIM_DeInit
-                0x08002f6c                TIM_TimeBaseInit
-                0x0800312c                TIM_TimeBaseStructInit
-                0x0800315e                TIM_PrescalerConfig
-                0x0800324c                TIM_CounterModeConfig
-                0x080032fc                TIM_SetCounter
-                0x080033c8                TIM_SetAutoreload
-                0x08003494                TIM_GetCounter
-                0x0800355c                TIM_GetPrescaler
-                0x08003624                TIM_UpdateDisableConfig
-                0x08003728                TIM_UpdateRequestConfig
-                0x0800382c                TIM_ARRPreloadConfig
-                0x08003930                TIM_SelectOnePulseMode
-                0x08003a2c                TIM_SetClockDivision
-                0x08003b1c                TIM_Cmd
-                0x08003c20                TIM_OC1Init
-                0x08003e7c                TIM_OC2Init
-                0x080040c4                TIM_OC3Init
-                0x080042f0                TIM_OC4Init
-                0x08004490                TIM_OCStructInit
-                0x080044d2                TIM_SelectOCxM
-                0x0800467c                TIM_SetCompare1
-                0x08004730                TIM_SetCompare2
-                0x080047b4                TIM_SetCompare3
-                0x08004820                TIM_SetCompare4
-                0x0800488c                TIM_ForcedOC1Config
-                0x08004970                TIM_ForcedOC2Config
-                0x08004a28                TIM_ForcedOC3Config
-                0x08004ac4                TIM_ForcedOC4Config
-                0x08004b64                TIM_OC1PreloadConfig
-                0x08004c48                TIM_OC2PreloadConfig
-                0x08004d00                TIM_OC3PreloadConfig
-                0x08004d9c                TIM_OC4PreloadConfig
-                0x08004e3c                TIM_OC1FastConfig
-                0x08004f20                TIM_OC2FastConfig
-                0x08004fd8                TIM_OC3FastConfig
-                0x08005074                TIM_OC4FastConfig
-                0x08005114                TIM_ClearOC1Ref
-                0x080051f8                TIM_ClearOC2Ref
-                0x080052b0                TIM_ClearOC3Ref
-                0x0800534c                TIM_ClearOC4Ref
-                0x080053ec                TIM_OC1PolarityConfig
-                0x080054d0                TIM_OC1NPolarityConfig
-                0x08005540                TIM_OC2PolarityConfig
-                0x080055f8                TIM_OC2NPolarityConfig
-                0x0800566c                TIM_OC3PolarityConfig
-                0x0800570c                TIM_OC3NPolarityConfig
-                0x08005780                TIM_OC4PolarityConfig
-                0x08005820                TIM_CCxCmd
-                0x08005944                TIM_CCxNCmd
-                0x080059f0                TIM_ICInit
-                0x08005c88                TIM_ICStructInit
-                0x08005cb8                TIM_PWMIConfig
-                0x08005ddc                TIM_GetCapture1
-                0x08005e8c                TIM_GetCapture2
-                0x08005f0c                TIM_GetCapture3
-                0x08005f74                TIM_GetCapture4
-                0x08005fdc                TIM_SetIC1Prescaler
-                0x080060cc                TIM_SetIC2Prescaler
-                0x08006190                TIM_SetIC3Prescaler
-                0x08006238                TIM_SetIC4Prescaler
-                0x080062e4                TIM_BDTRConfig
-                0x08006414                TIM_BDTRStructInit
-                0x08006450                TIM_CtrlPWMOutputs
-                0x080064d4                TIM_SelectCOM
-                0x0800654c                TIM_CCPreloadControl
-                0x080065c4                TIM_ITConfig
-                0x080066ec                TIM_GenerateEvent
-                0x080067d4                TIM_GetFlagStatus
-                0x08006914                TIM_ClearFlag
-                0x080069e4                TIM_GetITStatus
-                0x08006b20                TIM_ClearITPendingBit
-                0x08006bf0                TIM_DMAConfig
-                0x08006d84                TIM_DMACmd
-                0x08006e64                TIM_SelectCCDMA
-                0x08006f08                TIM_InternalClockConfig
-                0x08006f94                TIM_ITRxExternalClockConfig
-                0x08007050                TIM_TIxExternalClockConfig
-                0x08007174                TIM_ETRClockMode1Config
-                0x08007274                TIM_ETRClockMode2Config
-                0x08007354                TIM_SelectInputTrigger
-                0x0800745c                TIM_SelectOutputTrigger
-                0x08007534                TIM_SelectSlaveMode
-                0x080075f4                TIM_SelectMasterSlaveMode
-                0x080076a8                TIM_ETRConfig
-                0x0800779c                TIM_EncoderInterfaceConfig
-                0x080078f0                TIM_SelectHallSensor
-                0x080079ac                TIM_RemapConfig
+                0x08000408                range
+                0x0800043e                tempToDuty
+                0x08000462                timSetDutyCycleTemp
+ .text          0x080004a8       0x38 build/pwmGPIO.o
+                0x080004a8                pwm_setupEZ
+ .text          0x080004e0     0x19fc build/stm32f4xx_rcc.o
+                0x080004e0                RCC_DeInit
+                0x08000550                RCC_HSEConfig
+                0x08000594                RCC_WaitForHSEStartUp
+                0x080005e4                RCC_AdjustHSICalibrationValue
+                0x08000630                RCC_HSICmd
+                0x08000668                RCC_LSEConfig
+                0x080006c8                RCC_LSICmd
+                0x08000700                RCC_PLLConfig
+                0x080007d4                RCC_PLLCmd
+                0x0800080c                RCC_PLLI2SConfig
+                0x080008cc                RCC_PLLI2SCmd
+                0x08000904                RCC_PLLSAIConfig
+                0x080009a0                RCC_PLLSAICmd
+                0x080009d8                RCC_ClockSecuritySystemCmd
+                0x08000a10                RCC_MCO1Config
+                0x08000aa8                RCC_MCO2Config
+                0x08000b40                RCC_SYSCLKConfig
+                0x08000b9c                RCC_GetSYSCLKSource
+                0x08000bb8                RCC_HCLKConfig
+                0x08000c30                RCC_PCLK1Config
+                0x08000c98                RCC_PCLK2Config
+                0x08000d04                RCC_GetClocksFreq
+                0x08000edc                RCC_RTCCLKConfig
+                0x080010bc                RCC_RTCCLKCmd
+                0x080010f4                RCC_BackupResetCmd
+                0x0800112c                RCC_I2SCLKConfig
+                0x080011d0                RCC_SAICLKConfig
+                0x08001274                RCC_SAIPLLI2SClkDivConfig
+                0x080012c8                RCC_SAIPLLSAIClkDivConfig
+                0x08001320                RCC_LTDCCLKDivConfig
+                0x08001384                RCC_TIMCLKPresConfig
+                0x080013b8                RCC_AHB1PeriphClockCmd
+                0x0800142c                RCC_AHB2PeriphClockCmd
+                0x0800149c                RCC_AHB3PeriphClockCmd
+                0x08001508                RCC_APB1PeriphClockCmd
+                0x08001578                RCC_APB2PeriphClockCmd
+                0x080015ec                RCC_AHB1PeriphResetCmd
+                0x08001660                RCC_AHB2PeriphResetCmd
+                0x080016d0                RCC_AHB3PeriphResetCmd
+                0x0800173c                RCC_APB1PeriphResetCmd
+                0x080017ac                RCC_APB2PeriphResetCmd
+                0x08001820                RCC_AHB1PeriphClockLPModeCmd
+                0x08001894                RCC_AHB2PeriphClockLPModeCmd
+                0x08001904                RCC_AHB3PeriphClockLPModeCmd
+                0x08001970                RCC_APB1PeriphClockLPModeCmd
+                0x080019e0                RCC_APB2PeriphClockLPModeCmd
+                0x08001a54                RCC_LSEModeConfig
+                0x08001aa4                RCC_48MHzClockSourceConfig
+                0x08001afc                RCC_SDIOClockSourceConfig
+                0x08001b54                RCC_AHB1ClockGatingCmd
+                0x08001bc8                RCC_SPDIFRXClockSourceConfig
+                0x08001c20                RCC_CECClockSourceConfig
+                0x08001c78                RCC_FMPI2C1ClockSourceConfig
+                0x08001cd0                RCC_ITConfig
+                0x08001d4c                RCC_GetFlagStatus
+                0x08001e20                RCC_ClearFlag
+                0x08001e3c                RCC_GetITStatus
+                0x08001eac                RCC_ClearITPendingBit
+ .text          0x08001edc      0xec0 build/stm32f4xx_gpio.o
+                0x08001edc                GPIO_DeInit
+                0x080020a4                GPIO_Init
+                0x080022ec                GPIO_StructInit
+                0x0800231e                GPIO_PinLockConfig
+                0x08002400                GPIO_ReadInputDataBit
+                0x0800253c                GPIO_ReadInputData
+                0x080025e4                GPIO_ReadOutputDataBit
+                0x08002720                GPIO_ReadOutputData
+                0x080027c8                GPIO_SetBits
+                0x08002884                GPIO_ResetBits
+                0x08002944                GPIO_WriteBit
+                0x08002a94                GPIO_Write
+                0x08002b40                GPIO_ToggleBits
+                0x08002bf4                GPIO_PinAFConfig
+ .text          0x08002d9c     0x4f5c build/stm32f4xx_tim.o
+                0x08002d9c                TIM_DeInit
+                0x08002fd8                TIM_TimeBaseInit
+                0x08003198                TIM_TimeBaseStructInit
+                0x080031ca                TIM_PrescalerConfig
+                0x080032b8                TIM_CounterModeConfig
+                0x08003368                TIM_SetCounter
+                0x08003434                TIM_SetAutoreload
+                0x08003500                TIM_GetCounter
+                0x080035c8                TIM_GetPrescaler
+                0x08003690                TIM_UpdateDisableConfig
+                0x08003794                TIM_UpdateRequestConfig
+                0x08003898                TIM_ARRPreloadConfig
+                0x0800399c                TIM_SelectOnePulseMode
+                0x08003a98                TIM_SetClockDivision
+                0x08003b88                TIM_Cmd
+                0x08003c8c                TIM_OC1Init
+                0x08003ee8                TIM_OC2Init
+                0x08004130                TIM_OC3Init
+                0x0800435c                TIM_OC4Init
+                0x080044fc                TIM_OCStructInit
+                0x0800453e                TIM_SelectOCxM
+                0x080046e8                TIM_SetCompare1
+                0x0800479c                TIM_SetCompare2
+                0x08004820                TIM_SetCompare3
+                0x0800488c                TIM_SetCompare4
+                0x080048f8                TIM_ForcedOC1Config
+                0x080049dc                TIM_ForcedOC2Config
+                0x08004a94                TIM_ForcedOC3Config
+                0x08004b30                TIM_ForcedOC4Config
+                0x08004bd0                TIM_OC1PreloadConfig
+                0x08004cb4                TIM_OC2PreloadConfig
+                0x08004d6c                TIM_OC3PreloadConfig
+                0x08004e08                TIM_OC4PreloadConfig
+                0x08004ea8                TIM_OC1FastConfig
+                0x08004f8c                TIM_OC2FastConfig
+                0x08005044                TIM_OC3FastConfig
+                0x080050e0                TIM_OC4FastConfig
+                0x08005180                TIM_ClearOC1Ref
+                0x08005264                TIM_ClearOC2Ref
+                0x0800531c                TIM_ClearOC3Ref
+                0x080053b8                TIM_ClearOC4Ref
+                0x08005458                TIM_OC1PolarityConfig
+                0x0800553c                TIM_OC1NPolarityConfig
+                0x080055ac                TIM_OC2PolarityConfig
+                0x08005664                TIM_OC2NPolarityConfig
+                0x080056d8                TIM_OC3PolarityConfig
+                0x08005778                TIM_OC3NPolarityConfig
+                0x080057ec                TIM_OC4PolarityConfig
+                0x0800588c                TIM_CCxCmd
+                0x080059b0                TIM_CCxNCmd
+                0x08005a5c                TIM_ICInit
+                0x08005cf4                TIM_ICStructInit
+                0x08005d24                TIM_PWMIConfig
+                0x08005e48                TIM_GetCapture1
+                0x08005ef8                TIM_GetCapture2
+                0x08005f78                TIM_GetCapture3
+                0x08005fe0                TIM_GetCapture4
+                0x08006048                TIM_SetIC1Prescaler
+                0x08006138                TIM_SetIC2Prescaler
+                0x080061fc                TIM_SetIC3Prescaler
+                0x080062a4                TIM_SetIC4Prescaler
+                0x08006350                TIM_BDTRConfig
+                0x08006480                TIM_BDTRStructInit
+                0x080064bc                TIM_CtrlPWMOutputs
+                0x08006540                TIM_SelectCOM
+                0x080065b8                TIM_CCPreloadControl
+                0x08006630                TIM_ITConfig
+                0x08006758                TIM_GenerateEvent
+                0x08006840                TIM_GetFlagStatus
+                0x08006980                TIM_ClearFlag
+                0x08006a50                TIM_GetITStatus
+                0x08006b8c                TIM_ClearITPendingBit
+                0x08006c5c                TIM_DMAConfig
+                0x08006df0                TIM_DMACmd
+                0x08006ed0                TIM_SelectCCDMA
+                0x08006f74                TIM_InternalClockConfig
+                0x08007000                TIM_ITRxExternalClockConfig
+                0x080070bc                TIM_TIxExternalClockConfig
+                0x080071e0                TIM_ETRClockMode1Config
+                0x080072e0                TIM_ETRClockMode2Config
+                0x080073c0                TIM_SelectInputTrigger
+                0x080074c8                TIM_SelectOutputTrigger
+                0x080075a0                TIM_SelectSlaveMode
+                0x08007660                TIM_SelectMasterSlaveMode
+                0x08007714                TIM_ETRConfig
+                0x08007808                TIM_EncoderInterfaceConfig
+                0x0800795c                TIM_SelectHallSensor
+                0x08007a18                TIM_RemapConfig
  *(.rodata)
- .rodata        0x08007c8c       0x73 build/stm32f4xx_rcc.o
- *fill*         0x08007cff        0x1 
- .rodata        0x08007d00       0x64 build/stm32f4xx_gpio.o
- .rodata        0x08007d64       0x63 build/stm32f4xx_tim.o
-                0x08007dc8                        . = ALIGN (0x4)
- *fill*         0x08007dc7        0x1 
-                0x08007dc8                        _sidata = LOADADDR (.data)
+ .rodata        0x08007cf8       0x73 build/stm32f4xx_rcc.o
+ *fill*         0x08007d6b        0x1 
+ .rodata        0x08007d6c       0x64 build/stm32f4xx_gpio.o
+ .rodata        0x08007dd0       0x63 build/stm32f4xx_tim.o
+                0x08007e34                        . = ALIGN (0x4)
+ *fill*         0x08007e33        0x1 
+                0x08007e34                        _sidata = LOADADDR (.data)
 
-.glue_7         0x08007dc8        0x0
- .glue_7        0x08007dc8        0x0 linker stubs
+.glue_7         0x08007e34        0x0
+ .glue_7        0x08007e34        0x0 linker stubs
 
-.glue_7t        0x08007dc8        0x0
- .glue_7t       0x08007dc8        0x0 linker stubs
+.glue_7t        0x08007e34        0x0
+ .glue_7t       0x08007e34        0x0 linker stubs
 
-.vfp11_veneer   0x08007dc8        0x0
- .vfp11_veneer  0x08007dc8        0x0 linker stubs
+.vfp11_veneer   0x08007e34        0x0
+ .vfp11_veneer  0x08007e34        0x0 linker stubs
 
-.v4_bx          0x08007dc8        0x0
- .v4_bx         0x08007dc8        0x0 linker stubs
+.v4_bx          0x08007e34        0x0
+ .v4_bx         0x08007e34        0x0 linker stubs
 
-.iplt           0x08007dc8        0x0
- .iplt          0x08007dc8        0x0 build/main.o
+.iplt           0x08007e34        0x0
+ .iplt          0x08007e34        0x0 build/main.o
 
-.rel.dyn        0x08007dc8        0x0
- .rel.iplt      0x08007dc8        0x0 build/main.o
+.rel.dyn        0x08007e34        0x0
+ .rel.iplt      0x08007e34        0x0 build/main.o
 
-.data           0x20000000        0x0 load address 0x08007dc8
+.data           0x20000000        0x0 load address 0x08007e34
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _sdata = .
  *(.data)
@@ -350,10 +352,10 @@ LOAD build/stm32f4xx_tim.o
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _edata = .
 
-.igot.plt       0x20000000        0x0 load address 0x08007dc8
+.igot.plt       0x20000000        0x0 load address 0x08007e34
  .igot.plt      0x20000000        0x0 build/main.o
 
-.bss            0x20000000        0x0 load address 0x08007dc8
+.bss            0x20000000        0x0 load address 0x08007e34
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _sbss = .
  *(.bss)

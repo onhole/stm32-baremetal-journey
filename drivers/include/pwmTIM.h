@@ -10,7 +10,7 @@
 
 void timerSetup (void);
 void tim_setupEZ(void);
-void timSetDutyCycle(uint8_t duty);
+void timSetDutyCycleTemp(uint8_t temperature);
 
 
 #endif

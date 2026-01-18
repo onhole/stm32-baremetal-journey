@@ -81,10 +81,35 @@ void tim_setupEZ(void) {
 
 }
 
-void timSetDutyCycle(uint8_t duty) {
+
+uint8_t range(int x, int min, int max)
+{
+    if (x < min) return min;
+    if (x > max) return max;
+    return x;
+}
+
+
+uint8_t tempToDuty (uint8_t temperature) {
+    // use this formula: Duty = range( (T − 30) × 4 , 0, 100 )
+    /*
+    < 30 °C	0%
+    30–35 °C	20%
+    35–40 °C	40%
+    40–45 °C	60%
+    45–50 °C	80%
+    ≥ 50 °C	100%
+    */
+    
+    return (range((temperature - 30) * 4, 0, 100));
+}
+
+void timSetDutyCycleTemp(uint8_t temperature) {
     // set the ccr1 value according to the duty cycle that is wanted.
-    if (duty > 100) { // caps out at 100%.
+    uint8_t duty = tempToDuty(temperature);
+    if (duty > 100) { // caps out  100%.
         duty = 100;
     }
     TIM2->CCR1 = (TIM2->ARR * duty) / 100;
 }
+
