@@ -44,7 +44,8 @@ void tim_setupEZ(void) {
 
     /* Compute the prescaler value */
     uint16_t PrescalerValue = (uint16_t) (1000 - 1);
-    uint16_t CCR1_Val = (uint16_t) (10 - 1);
+    uint16_t arrValue = (uint16_t) (100 - 1); // resolution
+    uint16_t CCR1_Val = (uint16_t) (0); // initial duty cycle.
 
     TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
     TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
@@ -58,7 +59,7 @@ void tim_setupEZ(void) {
     */
 
     /* Time base configuration */
-    TIM_TimeBaseStructure.TIM_Period = 99;
+    TIM_TimeBaseStructure.TIM_Period = arrValue;
     TIM_TimeBaseStructure.TIM_Prescaler = PrescalerValue;
     TIM_TimeBaseStructure.TIM_ClockDivision = 0;
     TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
@@ -78,4 +79,9 @@ void tim_setupEZ(void) {
     TIM_Cmd(TIM2, ENABLE);
 
 
+}
+
+void timSetDutyCycle(uint8_t duty) {
+    // set the ccr1 value according to the duty cycle that is wanted.
+    TIM2->CCR1 = (TIM2->ARR * duty) / 100;
 }
